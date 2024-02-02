@@ -9,7 +9,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, \
     HTTP_400_BAD_REQUEST
 
 from .pagenation import UserPaginator
-from .serializers import UserSerializer, SubscribeSerializer
+from .serializers import UserSerializer1, SubscribeSerializer
 from .models import Subscribe
 
 
@@ -18,8 +18,9 @@ User = get_user_model()
 
 class UserViewSet(DjoserUserViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer1
     pagination_class = UserPaginator
+    permission_classes = [IsAuthenticated]
 
     @action(methods=['post', 'delete'], detail=True,
             permission_classes=(IsAuthenticated,))

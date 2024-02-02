@@ -8,7 +8,7 @@ from .models import Subscribe
 User = get_user_model()
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer1(ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password']
@@ -20,13 +20,14 @@ class UserSerializer(ModelSerializer):
             'password': {'write_only': True}
         }
 
+
 class SubscribeSerializer(ModelSerializer):
     class Meta:
         model = Subscribe
         fields = 'user', 'author'
 
 
-class ExtendUserSerializer(UserSerializer):
+class ExtendUserSerializer(UserSerializer1):
     is_subscribed = SerializerMethodField(read_only=True)
 
     class Meta:
