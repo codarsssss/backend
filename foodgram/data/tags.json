@@ -1,0 +1,6 @@
+[
+  {"model": "recipes.tag", "pk": 1, "fields": {"name": "Завтрак", "color": "#5cb85c", "slug": "breakfast"}},
+  {"model": "recipes.tag", "pk": 2, "fields": {"name": "Обед", "color": "#d9534f", "slug": "dinner"}},
+  {"model": "recipes.tag", "pk": 3, "fields": {"name": "Ужин", "color": "#f0ad4e", "slug": "late_dinner"}},
+  {"model": "recipes.tag", "pk": 4, "fields": {"name": "Закуска", "color": "#a94442", "slug": "appetizers"}}
+]
