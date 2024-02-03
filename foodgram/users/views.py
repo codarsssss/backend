@@ -3,7 +3,7 @@ from djoser.views import UserViewSet as DjoserUserViewSet
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, \
     HTTP_400_BAD_REQUEST
@@ -20,7 +20,7 @@ class UserViewSet(DjoserUserViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer1
     pagination_class = UserPaginator
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     @action(methods=['post', 'delete'], detail=True,
             permission_classes=(IsAuthenticated,))
@@ -63,16 +63,3 @@ class UserViewSet(DjoserUserViewSet):
                 # Если подписка не найдена, возвращаем ошибку.
                 return Response({'errors': 'Подписка не найдена'},
                                 status=HTTP_400_BAD_REQUEST)
-
-        # if request.method == 'DELETE':
-        #     Subscribe.objects.filter(user=user, author=author).delete()
-        #     return Response(status=HTTP_204_NO_CONTENT)
-        # return Response({
-        #     'errors': 'Вы не были подписаны на этого автора рецептов'
-        # }, status=HTTP_400_BAD_REQUEST)
-
-    # def create(self, validated_data: dict) -> User:
-    #     serializer = UserSerializer(data=validated_data)
-    #     serializer.is_valid(
-    #         raise_exception=True)  # Это вызывает ValidationError, если данные не проходят валидацию
-    #     return serializer.save()

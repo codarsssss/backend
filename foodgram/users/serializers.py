@@ -20,11 +20,19 @@ class UserSerializer1(ModelSerializer):
             'password': {'write_only': True}
         }
 
+    def get_is_subscribed(self, obj):
+        request = self.context.get('request')
+        if not request or request.user.is_anonymous:
+            return False
+        return obj.subscribing.filter(user=request.user).exists()
+
+
+
 
 class SubscribeSerializer(ModelSerializer):
     class Meta:
         model = Subscribe
-        fields = 'user', 'author'
+        fields = '__all__'
 
 
 class ExtendUserSerializer(UserSerializer1):
